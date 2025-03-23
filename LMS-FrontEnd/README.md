@@ -13,13 +13,11 @@
 '''
 
 3. Install dependencies
-
 '''
     nmp install
 '''
 
 4. Run the server
-
 '''
   npm run dev
 '''
