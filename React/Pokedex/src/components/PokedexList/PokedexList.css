@@ -1,0 +1,23 @@
+.pokedex-list-wrapper {
+    margin: 2rem auto;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    gap : 1rem
+}
+
+.pokedex-wrapper {  
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items: center;
+    flex-basis: 30%;
+    gap: 1.5rem;
+}
+
+.controls button{
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-left: 0.5rem;
+}

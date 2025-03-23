@@ -1,0 +1,86 @@
+.detail-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap : 1rem
+}
+
+
+.pokemon-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+.pokemon-detail-name{
+    font-size: xx-large;
+    color: yellow;
+    margin-top: 1rem;
+}
+
+.pokemon-detail-height{
+    font-size: xx-large;
+    color: yellow;
+    margin-top: 1rem;
+}
+.pokemon-detail-weight{
+    font-size: xx-large;
+    color: yellow;
+    margin-top: 1rem;
+}
+
+.pokemon-detail-name{
+    font-size: xx-large;
+    color: yellow;
+    margin-top: 1rem;
+}
+
+.pokemon-detail-type{
+    margin-top: 1rem;
+    font-size: large;
+    color: black;
+    display: flex;
+    gap: 2rem;
+}
+
+.pokemon-detail-type > div{
+    border: 1px solid brown;
+    border-radius: 15px;
+    padding: 1rem;
+    background-color: beige;
+}
+
+.pokemon-detail-image{
+    max-height: 300px;
+    margin-top: 1rem;
+}
+.pokemon-detail-name, .pokemon-detail-height, .pokemon-detail-weight > span{
+    letter-spacing: 0.2rem;
+}
+
+
+
+.similar-pokemon-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.similar-pokemon-heading{
+    font-size: xx-large;
+    color:red;
+    margin-top: 1rem;
+}
+.similar-pokemon-details{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items: center;
+    flex-basis: 30%;
+    gap: 1.5rem;
+}
+

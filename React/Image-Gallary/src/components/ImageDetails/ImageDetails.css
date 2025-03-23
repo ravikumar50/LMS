@@ -1,0 +1,35 @@
+
+.image-details-image{
+    height: 250px;
+    width: 295px;
+    border-radius: 5%;
+}
+
+.image-details-wrapper{
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: rgb(124, 124, 174);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap : 2rem;
+    border-radius: 1%;
+}
+
+.image-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.image-details-title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.image-details-description{
+    font-size: 1rem;
+
+}
