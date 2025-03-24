@@ -29,3 +29,6 @@ Install Tailwind CSS
 ## Adding Plugins and Dependencies
 
 npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @taliwindcss/line-clamp
+
+
+## Configure Eslint pligins for import sorting
