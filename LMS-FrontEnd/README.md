@@ -32,3 +32,6 @@ npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-char
 
 
 ## Configure Eslint pligins for import sorting
+
+5. Add plugins in tailwind config file
+''' plugins: [require("daisyui"), require("@tailwindcss/line-clamp")] '''
