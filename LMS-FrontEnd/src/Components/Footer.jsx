@@ -13,16 +13,16 @@
                     </section>
 
                     <section className='flex items-center justify-center gap-5 text-2xl text-white'>
-                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300' >
+                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300 cursor-pointer' >
                             <BsFacebook/>
                         </a>
-                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300' >
+                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300 cursor-pointer' >
                             <BsInstagram/>
                         </a>
-                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300' >
+                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300 cursor-pointer' >
                             <BsLinkedin/>
                         </a>
-                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300' >
+                        <a className='hover:text-yellow-500 transition-all ease-in-out duration-300 cursor-pointer' >
                             <BsTwitter/>
                         </a>
 

@@ -81,11 +81,11 @@ function HomeLayout({children}){
                         {!isLoggedIn && (
                             <li className="absolute bottom-4 w-[90%]">
                                 <div className="w-full flex items-center justify-center">
-                                    <button className="btn btn-primary px-4 py-1 font-semibold rounded-md w-1/2 text-center">
-                                        <Link to={"/login"} >Login</Link>
+                                    <button className="btn btn-primary px-4 py-1 font-semibold rounded-md w-1/2 text-center" onClick={() => navigate("/login")}>
+                                        Login
                                     </button>
-                                    <button className="btn btn-secondary px-4 py-1 font-semibold rounded-md w-1/2 text-center">
-                                        <Link to={"/signin"} >SignIn</Link>
+                                    <button className="btn btn-secondary px-4 py-1 font-semibold rounded-md w-1/2 text-center" onClick={() => navigate("/signup")}>
+                                        SignUp
                                     </button>
                                 </div>
                             </li>
