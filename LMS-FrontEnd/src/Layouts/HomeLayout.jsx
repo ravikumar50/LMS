@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/footer";
 import {useDispatch, useSelector} from 'react-redux';
+import { logoutFromAccount } from "../Redux/Slices/AuthSlice";
 
 
 function HomeLayout({children}){
@@ -29,13 +30,17 @@ function HomeLayout({children}){
         drawerSide[0].style.width = '0';
     }
 
-    function handleLogout(e){
+    async function handleLogout(e) {
         e.preventDefault();
-        // const res = await dispatch(logout());
-        // if(res?.payload?.sucess)
-        navigate("/");
-            
+        const res = await dispatch(logoutFromAccount());
+        console.log(res);
+        
+        if (res?.payload?.success) {
+          navigate("/");
+        }
     }
+
+
     return(
         <div className="min-h-[90vh]">
             <div className="drawer absolute left-0 z-50 w-fit">
@@ -92,15 +97,19 @@ function HomeLayout({children}){
                         )}
 
                         {isLoggedIn && (
-                            <div className="w-full flex items-center justify-center gap-4 mt-4">
-                                <Link to="/user/profile" className="w-full">
-                                    <button className="btn btn-primary w-full text-center">Profile</button>
-                                </Link>
-                                <Link onClick={handleLogout} className="w-full">
-                                    <button className="btn btn-secondary w-full text-center">Logout</button>
-                                </Link>
-                            </div>
+                            <li className="absolute bottom-4 w-[90%]">
+                                <div className="w-full flex items-center justify-center">
+                                    <button className="btn btn-primary px-4 py-1 font-semibold rounded-md w-1/2 text-center" onClick={() => navigate("/user/profile")}>
+                                        Profile
+                                    </button>
+                                    <button className="btn btn-secondary px-4 py-1 font-semibold rounded-md w-1/2 text-center" onClick={handleLogout}>
+                                        Logout
+                                    </button>
+                                </div>
+                            </li>
                         )}
+
+                        
                     </ul>
                 </div>
             
