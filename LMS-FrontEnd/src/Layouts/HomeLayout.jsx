@@ -97,7 +97,7 @@ function HomeLayout({children}){
                                     <button className="btn btn-primary w-full text-center">Profile</button>
                                 </Link>
                                 <Link onClick={handleLogout} className="w-full">
-                                    <button className="btn btn-primary w-full text-center">Logout</button>
+                                    <button className="btn btn-secondary w-full text-center">Logout</button>
                                 </Link>
                             </div>
                         )}
