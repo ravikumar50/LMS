@@ -4,6 +4,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { createAccount } from "../Redux/Slices/AuthSlice";
 
 function SignUp(){
 
@@ -12,7 +13,7 @@ function SignUp(){
 
     const [previewImage, setPreviewImage] = useState("");
     const [signUpData, setSignUpData] = useState({
-        fullName: "",
+        name: "",
         email : "",
         password : "",
         avatar : ""
@@ -39,22 +40,20 @@ function SignUp(){
             const fileReader = new FileReader();
             fileReader.readAsDataURL(uploadedImage);
             fileReader.addEventListener('load',()=>{
-                console.log(fileReader.result);
-                
                 setPreviewImage(fileReader.result);
             })
         }
     }
 
-    function createNewAccount(event){
+    async function createNewAccount(event){
         event.preventDefault();
 
-        if(!signUpData.fullName || !signUpData.email || !signUpData.password){
+        if(!signUpData.name || !signUpData.email || !signUpData.password){
             toast.error("Please fill all the fields")
             return;
         }
 
-        if(signUpData.fullName.length<3){
+        if(signUpData.name.length<3){
             toast.error("Name must be at least 3 characters long")
             return;
         }
@@ -68,7 +67,7 @@ function SignUp(){
         }
 
         const formData = new FormData();
-        formData.append('fullName', signUpData.fullName);
+        formData.append('name', signUpData.name);
         formData.append('email', signUpData.email);
         formData.append('password', signUpData.password);
         formData.append('avatar', signUpData.avatar);
@@ -76,16 +75,19 @@ function SignUp(){
         // dispatch create account action
 
 
+        const response = await dispatch(createAccount(formData)).unwrap();
+      //  console.log(response);
+        
+        if(response?.success) navigate("/");
+    
+
         setSignUpData({
-            fullName: "",
+            name: "",
             email : "",
             password : "",
             avatar : ""
         })
         setPreviewImage("");
-
-        navigate("/")
-
         
     }
     return(
@@ -112,15 +114,15 @@ function SignUp(){
                     />
 
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="fullName" className="font-semibold">Name</label>
+                        <label htmlFor="name" className="font-semibold">Name</label>
                         <input
                             type="text"
                             required
-                            name="fullName"
-                            id="fullName"
+                            name="name"
+                            id="name"
                             placeholder="Enter your name"
                             onChange={handleUserInput}
-                            value={signUpData.fullName}
+                            value={signUpData.name}
                             className="bg-transparent px-2 py-1 border rounded-md"
                         />
                     </div>
