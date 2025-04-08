@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { isValidElement, useState } from "react";
 import HomeLayout from "../Layouts/HomeLayout";
 import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { createAccount } from "../Redux/Slices/AuthSlice";
+import { isValidEmail, isValidPassword } from "../Helpers/regexMatcher";
 
 function SignUp(){
 
@@ -58,11 +59,11 @@ function SignUp(){
             return;
         }
 
-        if(signUpData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) === null){
+        if(!isValidEmail(signUpData.email)){
             return toast.error("Please enter a valid email address");
         }
 
-        if (!signUpData.password.match(/^(?=.*[a-z])(?=.*[A-Z])((?=.*\d)|(?=.*\W)).{8,}$/)) {
+        if (!isValidPassword(signUpData.password)) {
             return toast.error("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number or special character.");
         }
 
