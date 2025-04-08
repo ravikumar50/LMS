@@ -4,9 +4,11 @@ import {toast} from "react-hot-toast"
 import axios from "axios";
 import SignUp from "../../Pages/SignUp";
 
+
+
 const initialState = {
     isLoggedIn : localStorage.getItem("isLoggedIn") || false,
-    role : localStorage.getItem("role") || "",
+    role : localStorage.getItem('role') || "",
     data : localStorage.getItem("data") || {},
 }
 
