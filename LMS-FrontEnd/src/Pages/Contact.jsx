@@ -21,11 +21,13 @@ function Contact(){
     }
 
     async function onFormSubmit(e){
-        e.prevenDefault();
+        e.preventDefault();
 
         if(!userInput.email || !userInput.name || !userInput.message){
-            toast.error("All fields are required")
+            return toast.error("All fields are required")
         }
+
+        
 
         if(!isValidEmail(userInput.email)){
             return toast.error("Please enter a valid email address");
