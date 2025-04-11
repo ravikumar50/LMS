@@ -50,8 +50,7 @@ function SignUp(){
         event.preventDefault();
 
         if(!signUpData.name || !signUpData.email || !signUpData.password){
-            toast.error("Please fill all the fields")
-            return;
+            return toast.error("Please fill all the fields")
         }
 
         if(signUpData.name.length<3){
@@ -77,7 +76,7 @@ function SignUp(){
 
 
         const response = await dispatch(createAccount(formData)).unwrap();
-      //  console.log(response);
+      
         
         if(response?.success) navigate("/");
     
@@ -156,7 +155,7 @@ function SignUp(){
                         />
                     </div>
 
-                    <button type="submit" className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-200 mt-2 py-2 rounded-md font-semibold text-lg cursor-pointer text-white">
+                    <button type="submit" className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 mt-2 py-2 rounded-md font-semibold text-lg cursor-pointer text-white">
                         Create Account
                     </button>
 

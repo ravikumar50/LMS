@@ -19,18 +19,41 @@ export const getAllCourses = createAsyncThunk("/courses/get", async(_,{rejectWit
           });
           return res.data.courses;
     }catch(error){
-        return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 })
+
+export const createNewCourse = createAsyncThunk("/courses/createCourse", async(data,{rejectWithValue})=>{
+    try{
+        const promise = axiosInstance.post("/courses/createCourse",data);
+        const res = await toast.promise(promise,{
+            loading : "Wait! Creating Course...",
+            success : (res) => res?.data?.message || "Course Created Successfully!",
+            error : (err) => err?.response?.data?.message || "Failed to Create Course",
+        })
+        return res.data;
+    }catch(error){
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
+    }    
+})
+
+
 
 const courseSlice = createSlice({
     name : 'courses',
     initialState,
     reducers : {},
     extraReducers : (builder) => {
-        builder.addCase(getAllCourses.fulfilled,(state,action)=>{
+        builder
+        
+        .addCase(getAllCourses.fulfilled,(state,action)=>{
             if(action.payload){
                 state.courseData = [...action.payload];
+            }
+        })
+        .addCase(createNewCourse.fulfilled,(state,action)=>{
+            if(action.payload){
+                state.courseData.push(action.payload);
             }
         })
     }

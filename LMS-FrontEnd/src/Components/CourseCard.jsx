@@ -10,7 +10,7 @@ function CourseCard({data}){
             <div className="overflow-hidden">
                 <img
                     className="h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale=[1,2] transition-all ease-in-out duration-300"
-                    src={data?.thumbnail.secure_url}
+                    src={data?.thumbnail?.secure_url}
                     alt="Course Thumbnail"
                 />
 
