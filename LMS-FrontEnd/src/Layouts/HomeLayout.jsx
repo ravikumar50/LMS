@@ -33,8 +33,6 @@ function HomeLayout({children}){
     async function handleLogout(e) {
         e.preventDefault();
         const res = await dispatch(logoutFromAccount());
-        console.log(res);
-        
         if (res?.payload?.success) {
           navigate("/");
         }

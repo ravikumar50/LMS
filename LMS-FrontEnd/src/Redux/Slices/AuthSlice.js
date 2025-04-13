@@ -9,8 +9,8 @@ import SignUp from "../../Pages/SignUp";
 const initialState = {
     isLoggedIn : localStorage.getItem("isLoggedIn") || false,
     role : localStorage.getItem('role') || "",
-    data : JSON.parse(localStorage.getItem("data")) || {},
-}
+    data : localStorage.getItem("data")===undefined ? {} : JSON.parse(localStorage.getItem("data")
+)}
 
 export const createAccount = createAsyncThunk("/auth/signup", async (data,{rejectWithValue}) => {
     try {
@@ -23,7 +23,7 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data,{rejec
         error: (err) => err?.response?.data?.message || "Failed to create account",
       });
   
-      return res.data;
+      return res;
     } catch (err) {
       return rejectWithValue(err?.response?.data?.message || "Something went wrong");
     }
@@ -101,6 +101,22 @@ export const getUserData = createAsyncThunk("/auth/details", async (data,{reject
 });
 
 
+export const updatePassword = createAsyncThunk("/auth/updatepassword", async (data,{rejectWithValue}) =>{
+  try{
+    const promise = axiosInstance.post("/user/changePassword",data);
+
+    const res = await toast.promise(promise,{
+      loading: "Wait! Changing Password...",
+      success: (res) => res?.data?.message || "Password changed successfully!",
+      error: (err) => err?.response?.data?.message || "Failed to Changed Password",
+    })
+    return res.data;
+  }catch (err) {
+    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  }
+})
+
+
 const authSlice = createSlice({
     name : 'auth',
     initialState,
@@ -137,6 +153,14 @@ const authSlice = createSlice({
             state.isLoggedIn = true;
             state.data = action?.payload?.user;
             state.role = action?.payload?.user?.role;
+        })
+        .addCase(updatePassword.fulfilled, (state,action)=>{
+          localStorage.setItem("data",JSON.stringify(action?.payload?.user));
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("role", action?.payload?.user?.role);
+          state.isLoggedIn = true;
+          state.data = action?.payload?.user;
+          state.role = action?.payload?.user?.role;
         })
     }
 })

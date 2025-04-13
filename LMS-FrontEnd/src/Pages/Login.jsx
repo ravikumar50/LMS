@@ -35,7 +35,6 @@ function Login(){
 
 
         const response = await dispatch(loginToAccount(loginData)).unwrap();
-      //  console.log(response);
         
         if(response?.success) navigate("/");
     
