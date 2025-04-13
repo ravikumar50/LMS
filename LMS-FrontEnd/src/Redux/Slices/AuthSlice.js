@@ -24,7 +24,7 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data,{rejec
       });
   
       return res.data;
-    } catch (error) {
+    } catch (err) {
       return rejectWithValue(err?.response?.data?.message || "Something went wrong");
     }
 });
@@ -64,6 +64,42 @@ export const logoutFromAccount = createAsyncThunk("/auth/logout", async (_,{reje
   }
 });
 
+export const updateProfile = createAsyncThunk("/auth/update", async (data,{rejectWithValue}) => {
+  try {
+    const promise = axiosInstance.put("user/update",data);
+
+    // Show toast inside the thunk
+    const res = await toast.promise(promise, {
+      loading: "Wait! Updating Details...",
+      success: (res) => res?.data?.message || "Details updated successfully!",
+      error: (err) => err?.response?.data?.message || "Failed to Update",
+    });
+
+    return res.data;
+  } catch (err) {
+    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  }
+});
+
+
+
+export const getUserData = createAsyncThunk("/auth/details", async (data,{rejectWithValue}) => {
+  try {
+    const promise = axiosInstance.get("user/me",data);
+
+    // Show toast inside the thunk
+    const res = await toast.promise(promise, {
+      loading: "Wait! Updating Details...",
+      success: (res) => res?.data?.message || "Details updated successfully!",
+      error: (err) => err?.response?.data?.message || "Failed to Update",
+    });
+
+    return res.data;
+  } catch (err) {
+    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  }
+});
+
 
 const authSlice = createSlice({
     name : 'auth',
@@ -93,6 +129,14 @@ const authSlice = createSlice({
             state.data = {};
             state.isLoggedIn = false;
             state.role ="";
+        })
+        .addCase(updateProfile.fulfilled, (state,action)=>{
+            localStorage.setItem("data",JSON.stringify(action?.payload?.user));
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("role", action?.payload?.user?.role);
+            state.isLoggedIn = true;
+            state.data = action?.payload?.user;
+            state.role = action?.payload?.user?.role;
         })
     }
 })

@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 
 function Profile(){
     const userData = useSelector((state)=> state.auth.data);
-    const dispatch = useDispatch();
-    
-    
     
     return(
         <HomeLayout>
@@ -37,14 +34,14 @@ function Profile(){
 
                    <div className="flex items-center justify-between gap-2">
                         <Link 
-                            to="/changepassword" 
+                            to="/user/changepassword" 
                             className="w-1/2 bg-yellow-500 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-md font-semibold py-2 cursor-pointer text-center">    
 
                             <button>Change Password</button>
                         </Link>
 
                         <Link 
-                            to="/editprofile" 
+                            to="/user/editprofile" 
                             className="w-1/2 bg-yellow-500 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-md font-semibold py-2 cursor-pointer text-center">    
 
                             <button>Edit Profile</button>
