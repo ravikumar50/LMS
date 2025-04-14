@@ -9,8 +9,15 @@ import SignUp from "../../Pages/SignUp";
 const initialState = {
     isLoggedIn : localStorage.getItem("isLoggedIn") || false,
     role : localStorage.getItem('role') || "",
-    data : localStorage.getItem("data")===undefined ? {} : JSON.parse(localStorage.getItem("data")
-)}
+    data: (() => {
+      const raw = localStorage.getItem("data");
+      try {
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    })()
+  }
 
 export const createAccount = createAsyncThunk("/auth/signup", async (data,{rejectWithValue}) => {
     try {
@@ -23,7 +30,7 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data,{rejec
         error: (err) => err?.response?.data?.message || "Failed to create account",
       });
   
-      return res;
+      return res.data;
     } catch (err) {
       return rejectWithValue(err?.response?.data?.message || "Something went wrong");
     }

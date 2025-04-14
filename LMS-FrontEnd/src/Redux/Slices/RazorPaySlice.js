@@ -14,39 +14,39 @@ const initialState = {
 
 export const getRazorPayId = createAsyncThunk("/razorpay/getId", async(_,{rejectWithValue})=>{
     try{
-        const res = await axiosInstance.get("/payements/razorpayKey");
+        const res = await axiosInstance.get("/payments/razorpayKey");
         return res.data;
     }catch(error){
-        return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 })
 
 
-export const purchaseCourseBundle = createAsyncThunk("/razorpay/purchase", async(data,{rejectWithValue})=>{
+export const purchaseCourseBundle = createAsyncThunk("/razorpay/purchase", async(userId,{rejectWithValue})=>{
     try{
-        const res = await axiosInstance.post("/payements/subscribe",data);
+        const res = await axiosInstance.post("/payments/subscribe",{id : userId});
         return res.data;
     }catch(error){
-        return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 })
 
 export const verifyUserPayment = createAsyncThunk("/razorpay/verifypayment", async(data,{rejectWithValue})=>{
     try{
-        const res = await axiosInstance.post("/payements/verify",{
+        const res = await axiosInstance.post("/payments/verify",{
             razorpay_payment_id : data.razorpay_payment_id,
             razorpay_signature : data.razorpay_signature,
             razorpay_subscription_id : data.razorpay_subscription_id
         });
         return res.data;
     }catch(error){
-        return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 })
 
 export const getPaymentRecords = createAsyncThunk("/razorpay/paymentrecord", async(_,{rejectWithValue})=>{
     try{
-        const res = await axiosInstance.get("/payements?count==20");
+        const res = await axiosInstance.get("/payments?count==20");
 
         toast.promise(res,{
             loading: "Wait! Getting the payment Details...",
@@ -55,7 +55,7 @@ export const getPaymentRecords = createAsyncThunk("/razorpay/paymentrecord", asy
           })
         return res.data;
     }catch(error){
-        return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 })
 
@@ -63,7 +63,7 @@ export const getPaymentRecords = createAsyncThunk("/razorpay/paymentrecord", asy
 
 export const cancelCourseBundle = createAsyncThunk("/razorpay/cancel", async(data,{rejectWithValue})=>{
     try{
-        const res = await axiosInstance.post("/payements/unsubscribe",data);
+        const res = await axiosInstance.post("/payments/unsubscribe",data);
 
         toast.promise(res,{
             loading: "Wait! Unsubscribing the Bundle...",
@@ -72,12 +72,12 @@ export const cancelCourseBundle = createAsyncThunk("/razorpay/cancel", async(dat
           })
         return res.data;
     }catch(error){
-        return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 })
 
 
-const rajorPaySlice = createSlice({
+const razorPaySlice = createSlice({
     name : 'rajorpoy',
     initialState,
     reducers : {},
@@ -118,4 +118,4 @@ const rajorPaySlice = createSlice({
     }
 })
 
-export default rajorPaySlice.reducer;
+export default razorPaySlice.reducer;
