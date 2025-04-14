@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 
 function Profile(){
     const userData = useSelector((state)=> state.auth.data);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    async function handleCancellation(){
+
+        toast.info("Initiating Cancellation")
+        await dispatch(cancelCourseBundle(userData._id));
+        await dispatch(getUserData(userData));
+
+        toast.success("Cancellation Completed");
+        navigate("/");
+    }
     
     return(
         <HomeLayout>
@@ -48,7 +60,7 @@ function Profile(){
                         </Link>
                    </div>
                    {userData?.subscription?.status==='active' &&
-                      <button className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-md font-semibold py-2 cursor-pointer text-center">
+                      <button onClick={handleCancellation} className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-md font-semibold py-2 cursor-pointer text-center">
                         Cancel Subscription
                       </button>
                    }

@@ -13,7 +13,7 @@ function CheckOut(){
 
     const razorpayKey = useSelector((state) => state.razorpay.key)
     const subscription_id = useSelector((state) => state.razorpay.subscription_id);
-    const isPaymentVerified = useSelector((state) => state.razorpay.isPaymentVerified);
+    
 
     const paymentDetail = {
         razorpay_payment_id : '',

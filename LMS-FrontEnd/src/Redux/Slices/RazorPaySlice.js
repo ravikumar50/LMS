@@ -61,13 +61,13 @@ export const getPaymentRecords = createAsyncThunk("/razorpay/paymentrecord", asy
 
 
 
-export const cancelCourseBundle = createAsyncThunk("/razorpay/cancel", async(data,{rejectWithValue})=>{
+export const cancelCourseBundle = createAsyncThunk("/razorpay/cancel", async(userId,{rejectWithValue})=>{
     try{
-        const res = await axiosInstance.post("/payments/unsubscribe",data);
+        const res = await axiosInstance.post("/payments/unsubscribe",{id : userId});
 
         toast.promise(res,{
             loading: "Wait! Unsubscribing the Bundle...",
-            success: (res) => res?.data?.message || "Unsubscribing successfully!",
+            success: (res) => res?.data?.message || "Unsubscribed successfully!",
             error: (err) => err?.response?.data?.message || "Failed to Unsubscribing",
           })
         return res.data;
