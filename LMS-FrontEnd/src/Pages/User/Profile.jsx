@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import HomeLayout from "../../Layouts/HomeLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Profile(){
     const userData = useSelector((state)=> state.auth.data);
