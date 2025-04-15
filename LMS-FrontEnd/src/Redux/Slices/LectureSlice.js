@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axiosInstance from "../../Helpers/axiosInstance";
+import { toast } from "react-hot-toast";
+import { act } from "react";
 
 const initialState = {
     lectures : []
@@ -8,13 +10,18 @@ const initialState = {
 
 export const getCourseLectures = createAsyncThunk("/courses/lecture/get",async(cid,{rejectWithValue})=>{
     try{
-        const promise = await axiosInstance.get(`/courses/${cid}`)
+        
+        
+        const promise = axiosInstance.get(`/courses/${cid}`)
+        
 
         const res = await toast.promise(promise,{
             loading : "Wait! Getting Lecture...",
             success : (res) => res?.data?.message || "Lecture fetched Successfully!",
             error : (err) => err?.response?.data?.message || "Failed to fetch Lecture",
         })
+        
+        
 
         return res.data;
     }catch(error){
@@ -32,7 +39,7 @@ export const addCourseLectures = createAsyncThunk("/courses/lecture/add",async(d
         formData.append("description", data.description);
 
 
-        const promise = await axiosInstance.post(`/courses/addLecture/${data.id}`,formData)
+        const promise = axiosInstance.post(`/courses/addLecture/${data.id}`,formData)
 
         const res = await toast.promise(promise,{
             loading : "Wait! Adding Course Lecture...",
@@ -49,7 +56,7 @@ export const addCourseLectures = createAsyncThunk("/courses/lecture/add",async(d
 
 export const deleteCourseLectures = createAsyncThunk("/courses/lecture/delete",async(data,{rejectWithValue})=>{
     try{
-        const promise = await axiosInstance.delete(`/courses?courseId=${data.courseId}&lectureId=${data.lectureId}`)
+        const promise = axiosInstance.delete(`/courses?courseId=${data.courseId}&lectureId=${data.lectureId}`)
 
         const res = await toast.promise(promise,{
             loading : "Wait! Deleting Course Lecture...",
@@ -72,14 +79,14 @@ const lectureSlice = createSlice({
     extraReducers : (builder) => {
         builder
           .addCase(getCourseLectures.fulfilled, (state,action)=>{
-               if(action.payload){
-                state.courseData = [...action.payload];
+               if(action.payload.lecture){
+                state.lectures = action.payload.lecture;
                }
           })
 
           .addCase(addCourseLectures.fulfilled, (state,action)=>{
             if(action.payload.course){
-             state.courseData.push(action.payload.course);
+             state.lectures.push(action.payload.course);
             }
           })
     }
