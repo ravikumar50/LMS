@@ -34,10 +34,9 @@ export const addCourseLectures = createAsyncThunk("/courses/lecture/add",async(d
     try{
 
         const formData = new FormData();
-        formData.append("lecture", data.lecture);
-        formData.append("title", data.title);
-        formData.append("description", data.description);
-
+        formData.append('lecture', data.lecture);
+        formData.append('title', data.title);
+        formData.append('description', data.description);
 
         const promise = axiosInstance.post(`/courses/addLecture/${data.id}`,formData)
 

@@ -10,6 +10,9 @@ function DisplayLectures(){
     const dispatch = useDispatch();
     const {state} = useLocation();
 
+    
+    
+
     const {lectures} = useSelector((state) => state.lecture);
     const {role} = useSelector((state)=> state.auth);
 
@@ -23,7 +26,6 @@ function DisplayLectures(){
 
     useEffect(()=>{
         if(!state) navigate("/courses");
-        
         dispatch(getCourseLectures(state._id));
     },[])
     return(
@@ -33,12 +35,13 @@ function DisplayLectures(){
                       Course Name : {state.title}
                 </div>
 
-                {lectures && lectures.length>0 && <div className="flex justify-center gap-10 w-full">
+                {(lectures && lectures.length>0) ? (
+                    <div className="flex justify-center gap-10 w-full">
                     {/* left section for playing videos and displaying course details to admin*/}
-                    <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black]">
+                    <div className="space-y-5 w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] h-fit mb-40">
                         <video 
-                            //    src={lectures && lectures[currVideo]?.lecture?.secure_url}
-                            src="https://www.youtube.com/watch?v=GqqwbcgOHek"
+                                src={lectures && lectures[currVideo]?.lecture?.secure_url}
+                          //  src="https://www.youtube.com/watch?v=GqqwbcgOHek"
                             className="object-fill rounded-t-lg w-full"
                             controls 
                             disablePictureInPicture
@@ -63,7 +66,7 @@ function DisplayLectures(){
 
                     {/* Right Section for displaying list of lectures */}
 
-                    <ul className="w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-4">
+                    <ul className="w-[28rem] p-2 rounded-lg shadow-[0_0_10px_black] space-y-4 mb-40">
                         <li className="text-xl font-semibold text-yellow-500 flex items-center justify-between">
                           <p>Lectures List</p>
                           {role==='ADMIN' && (
@@ -98,7 +101,15 @@ function DisplayLectures(){
                         }
                     </ul>
 
-                </div>}
+                    </div>) : (
+                    role==='ADMIN' && (
+                        <button 
+                            onClick={()=> navigate("/courses/addlecture", {state : {...state}})} 
+                            className="btn btn-primary px-2 py-1 rounded-md font-semibold text-sm">
+                            Add New Lecture
+                        </button>
+                    ))
+                }
             </div>
         </HomeLayout>
         )

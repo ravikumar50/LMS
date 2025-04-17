@@ -16,10 +16,9 @@ import EditProfile from "./Pages/User/EditProfile";
 import ChangePassword from "./Pages/User/ChangePassword";
 import CheckOut from "./Pages/Payment/CheckOut";
 import CheckOutSuccess from "./Pages/Payment/CheckOutSuccess";
-import CheckOutFail from "./Pages/Payment/CheckOutFailure";
 import CheckOutFailure from "./Pages/Payment/CheckOutFailure";
 import DisplayLectures from "./Pages/Dashboard/DisplayLectures";
-import Demo from "./Pages/Dashboard/Demo";
+import AddLecture from "./Pages/Dashboard/AddLecture";
 
 
 function App() {
@@ -36,6 +35,7 @@ function App() {
           <Route path="/courses/description" element={<CourseDescription/>}/>
           <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
               <Route path="/courses/create" element={<CreateCourse/>}/>          
+              <Route path="/courses/addlecture" element={<AddLecture/>}/>          
           </Route>
 
           <Route element={<RequireAuth allowedRoles={["ADMIN","USER"]}/>}>
@@ -49,7 +49,7 @@ function App() {
           </Route>
 
           <Route path="*" element={<NotFound/>}/>
-          <Route path="/demo" element={<Demo/>}/>
+          
       </Routes>
     </>
   );
