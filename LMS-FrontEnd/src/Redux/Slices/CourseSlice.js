@@ -14,7 +14,7 @@ export const getAllCourses = createAsyncThunk("/courses/get", async(_,{rejectWit
 
         const res = await toast.promise(promise, {
             loading: "Wait! Loading Courses Data...",
-            success: (res) => res?.data?.message || "Loded successfully!",
+            success: (res) => res?.data?.message || "Loaded successfully!",
             error: (err) => err?.response?.data?.message || "Failed to Load",
           });
           return res.data.courses;
@@ -38,6 +38,20 @@ export const createNewCourse = createAsyncThunk("/courses/createCourse", async(d
 })
 
 
+export const deleteCourse = createAsyncThunk("/courses/delete", async(cid,{rejectWithValue})=>{
+    try{
+        const promise = axiosInstance.get(`/courses/deleteCourse/${cid}`);
+
+        const res = await toast.promise(promise, {
+            loading: "Wait! Deleting Course...",
+            success: (res) => res?.data?.message || "Deleted successfully!",
+            error: (err) => err?.response?.data?.message || "Failed to Delete",
+          });
+          return res.data;
+    }catch(error){
+        return rejectWithValue(error?.response?.data?.message || "Something went wrong");
+    }
+})
 
 const courseSlice = createSlice({
     name : 'courses',

@@ -31,8 +31,8 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data,{rejec
       });
   
       return res.data;
-    } catch (err) {
-      return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 });
 
@@ -49,8 +49,8 @@ export const loginToAccount = createAsyncThunk("/auth/login", async (data,{rejec
       });
 
       return res.data;
-    } catch (err) {
-      return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+    } catch (error) {
+      return rejectWithValue(error?.response?.data?.message || "Something went wrong");
     }
 });
 
@@ -66,8 +66,8 @@ export const logoutFromAccount = createAsyncThunk("/auth/logout", async (_,{reje
     });
 
     return res.data;
-  } catch (err) {
-    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  } catch (error) {
+    return rejectWithValue(error?.response?.data?.message || "Something went wrong");
   }
 });
 
@@ -83,8 +83,8 @@ export const updateProfile = createAsyncThunk("/auth/update", async (data,{rejec
     });
 
     return res.data;
-  } catch (err) {
-    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  } catch (error) {
+    return rejectWithValue(error?.response?.data?.message || "Something went wrong");
   }
 });
 
@@ -102,8 +102,8 @@ export const getUserData = createAsyncThunk("/auth/details", async (data,{reject
     });
 
     return res.data;
-  } catch (err) {
-    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  } catch (error) {
+    return rejectWithValue(error?.response?.data?.message || "Something went wrong");
   }
 });
 
@@ -118,8 +118,8 @@ export const updatePassword = createAsyncThunk("/auth/updatepassword", async (da
       error: (err) => err?.response?.data?.message || "Failed to Changed Password",
     })
     return res.data;
-  }catch (err) {
-    return rejectWithValue(err?.response?.data?.message || "Something went wrong");
+  }catch (error) {
+    return rejectWithValue(error?.response?.data?.message || "Something went wrong");
   }
 })
 

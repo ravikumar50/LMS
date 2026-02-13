@@ -8,7 +8,6 @@ function Denied(){
             <h1 className="text-9xl font-extrabold text-white tracking-widest">
                 403
             </h1>
-            <button onClick={() => navigate('/')}>Test Navigate</button>
 
             <div className="bg-black text-white px-2 text-sm rounded rotate-12 absolute">
                 Access Denied
@@ -25,7 +24,7 @@ function Denied(){
                         if (window.location.pathname === "/denied") {
                             navigate("/");
                         }
-                    }, 500);
+                    }, 100);
                 }}
             >
                 <span className="relative block px-8 py-3 bg-[#1A2238] border border-current">

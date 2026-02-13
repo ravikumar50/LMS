@@ -9,6 +9,7 @@ function DisplayLectures(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {state} = useLocation();
+    
 
     
     
